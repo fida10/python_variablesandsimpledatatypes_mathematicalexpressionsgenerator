@@ -15,14 +15,14 @@ import sys
 
 def generate_expressions(target): 
     ans = []
-    addition_rand_int = random.randint(-sys.maxsize - 1, target) 
+    addition_rand_int = random.randint(-sys.maxsize - 1, target)
     # subtracting 1 because I am taking the maxsize (maximium number) allowed in python 
     # and then taking its negative. Because 0 is counted, I am subtracting 1 to get 
     # the minimum number allowed in python.
-    ans.append(str(addition_rand_int + (target - addition_rand_int)))
+    ans.append(f'{addition_rand_int} + {target - addition_rand_int}')
     
     subtraction_rand_int = random.randint(target, sys.maxsize)
-    ans.append(str(subtraction_rand_int - (subtraction_rand_int - target)))
+    ans.append(f'{subtraction_rand_int} - {subtraction_rand_int - target}')
     
     all_factors_of_target = [target]
     for i in range(2, (target // 2) + 1):
@@ -30,10 +30,11 @@ def generate_expressions(target):
             all_factors_of_target.append(i)
     
     multiplication_rand_int = random.choice(all_factors_of_target)
-    ans.append(str(multiplication_rand_int * (target / multiplication_rand_int)))
+    ans.append(f'{multiplication_rand_int} * {target / multiplication_rand_int}')
+    
     
     all_multiples_of_target = [target]
-    # for i in range(2, sys.maxsize): this is too much
+    #for i in range(2, sys.maxsize): #this is too much
     for i in range(2, 1000): # putting hard limit to stop this from running forever
         try:
             print(i)
@@ -42,9 +43,9 @@ def generate_expressions(target):
             break
     
     division_rand_int = random.choice(all_multiples_of_target)
-    ans.append(str(division_rand_int / (division_rand_int / target)))    
+    ans.append(f'{division_rand_int} / {division_rand_int / target}')
     
     return ans
 
 
-generate_expressions(8)
+print(generate_expressions(8))
